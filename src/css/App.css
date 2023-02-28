@@ -1,0 +1,71 @@
+.App {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-right: 10%;
+   
+}
+.App-header {
+  align-items: center;
+  justify-content: center;
+  font-family: Roboto;
+  display: flex;
+  margin-top: 12%;
+  
+}
+.Text-input{ 
+  margin-top: 15px;
+  font-size: 20px;
+}
+.Symbol{
+ margin-top: 75px;
+}
+.Text-symbol{
+  font-size: 20px;
+  margin-top: 15px;     
+}
+.Box-selected{
+  
+  font-family: Roboto;
+  font-size: 20pt;
+  display: inline-flex; 
+}
+.Box-selector{
+  margin: 10px;
+  width: 150px;
+  height: 37px;
+  font-size: 20px;
+  
+  
+}
+.active {
+  background-color: rgba(250, 5, 5, 0.05);
+}
+.Box-inputed{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  ;
+}
+.Box-input{
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 142px;
+  height: 31px;
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+.Button{
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 23px;
+text-align: center;
+color: rgba(0, 0, 0, 0.37);
+cursor: pointer;
+opacity: 67%;
+
+}
+
+
