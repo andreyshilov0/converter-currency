@@ -3,16 +3,16 @@ import Block from "./Block";
 import "./css/App.css";
 import { fixerAPI } from "./api/Apifixer";
 
-function App() {
-  const DEFAULT_FROM_CURRENCY = "USD";
-  const SET_DEFAULT_FROM_CURRENCY = "EUR";
+const DEFAULT_FROM_CURRENCY = "USD";
+const DEFAULT_TO_CURRENCY = "EUR";
 
+function App() {
   const [rates, setRates] = useState({});
   const [symbols, setSymbols] = useState({});
   const [fromCurrency, setFromCurrency] = useState(DEFAULT_FROM_CURRENCY);
-  const [toCurrency, setToCurrency] = useState(SET_DEFAULT_FROM_CURRENCY);
-  const [fromAmount, setFromAmount] = useState(0);
-  const [toAmount, setToAmount] = useState(1);
+  const [toCurrency, setToCurrency] = useState(DEFAULT_TO_CURRENCY);
+  const [fromAmount, setFromAmount] = useState();
+  const [toAmount, setToAmount] = useState();
 
   useEffect(() => {
     fixerAPI.getSymbols().then((json) => {
