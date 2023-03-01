@@ -1,13 +1,13 @@
 import React from "react";
 
-const Block = ({
+function Block({
   listCurrencies,
   value,
   onChangeCurrency,
   onChangeValue,
   currency,
   onChangeSelect,
-}) => {
+}) {
   return (
     <div className="box">
       <div className="box-selected">
@@ -43,6 +43,6 @@ const Block = ({
       </div>
     </div>
   );
-};
+}
 
 export default Block;

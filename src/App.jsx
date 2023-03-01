@@ -4,18 +4,21 @@ import "./css/App.css";
 import { fixerAPI } from "./api/Apifixer";
 
 function App() {
+  const DEFAULT_FROM_CURRENCY = "USD";
+  const SET_DEFAULT_FROM_CURRENCY = "EUR";
+
   const [rates, setRates] = useState({});
   const [symbols, setSymbols] = useState({});
-  const [DEFAULT_FROM_CURRENCY, SET_DEFAULT_FROM_CURRENCY] = useState("USD");
-  const [DEFAULT_TO_CURRENCY, SET_DEFAULT_TO_CURRENCY] = useState("EUR");
+  const [fromCurrency, setFromCurrency] = useState(DEFAULT_FROM_CURRENCY);
+  const [toCurrency, setToCurrency] = useState(SET_DEFAULT_FROM_CURRENCY);
   const [fromAmount, setFromAmount] = useState(0);
-  const [toAmount, SetToAmount] = useState(1);
+  const [toAmount, setToAmount] = useState(1);
 
   useEffect(() => {
     fixerAPI.getSymbols().then((json) => {
       setRates(json.symbols);
     });
-    fixerAPI.getLatest(DEFAULT_FROM_CURRENCY).then((json) => {
+    fixerAPI.getLatest(fromCurrency).then((json) => {
       setSymbols(json.rates);
       onChangeFromPrice(1);
     });
@@ -23,31 +26,33 @@ function App() {
 
   useEffect(() => {
     onChangeFromPrice(fromAmount);
-  }, [DEFAULT_FROM_CURRENCY]);
+  }, [fromCurrency]);
 
   useEffect(() => {
     onChangeToPrice(toAmount);
-  }, [DEFAULT_TO_CURRENCY]);
+  }, [toCurrency]);
 
   const onChangeFromPrice = (value) => {
-    const price = value * symbols[DEFAULT_TO_CURRENCY];
-    SetToAmount(price.toFixed(3));
+    const price = value * symbols[toCurrency];
+    setToAmount(price.toFixed(3));
     setFromAmount(value);
   };
   const onChangeToPrice = (value) => {
-    const result =
-      (symbols[DEFAULT_FROM_CURRENCY] / symbols[DEFAULT_TO_CURRENCY]) * value;
+    const result = (symbols[fromCurrency] / symbols[toCurrency]) * value;
     setFromAmount(result.toFixed(3));
-    SetToAmount(value);
+    setToAmount(value);
   };
   const onChangeFromCurrency = (cur) => {
-    SET_DEFAULT_FROM_CURRENCY(cur);
+    setFromCurrency(cur);
+  };
+  const onChangeToCurrency = (cur) => {
+    setToCurrency(cur);
   };
   const handleClick = () => {
-    SET_DEFAULT_FROM_CURRENCY(DEFAULT_TO_CURRENCY);
-    SET_DEFAULT_TO_CURRENCY(DEFAULT_FROM_CURRENCY);
+    setFromCurrency(toCurrency);
+    setToCurrency(fromCurrency);
     setFromAmount(toAmount);
-    SetToAmount(fromAmount);
+    setToAmount(fromAmount);
   };
 
   return (
@@ -58,20 +63,20 @@ function App() {
         <Block
           listCurrencies={rates}
           value={fromAmount}
-          currency={DEFAULT_FROM_CURRENCY}
+          currency={fromCurrency}
           onChangeCurrency={onChangeFromCurrency}
           onChangeValue={onChangeFromPrice}
-          onChangeSelect={(value) => SET_DEFAULT_FROM_CURRENCY(value)}
+          onChangeSelect={(value) => setFromCurrency(value)}
         />
         <p className="text-symbol">в</p>
         <p className="symbol">=</p>
         <Block
           listCurrencies={rates}
           value={toAmount}
-          currency={DEFAULT_TO_CURRENCY}
-          onChangeCurrency={SET_DEFAULT_TO_CURRENCY}
+          currency={toCurrency}
+          onChangeCurrency={onChangeToCurrency}
           onChangeValue={onChangeToPrice}
-          onChangeSelect={(value) => SET_DEFAULT_TO_CURRENCY(value)}
+          onChangeSelect={(value) => setToCurrency(value)}
         />
       </div>
       <button onClick={handleClick} className="button">

@@ -59,12 +59,9 @@ font-family: 'Roboto';
 font-style: normal;
 font-size: 20px;
 color: rgba(0, 0, 0, 0.37);
-cursor: pointer;
 opacity: 67%;
-display: block;
 border: none;
-margin: 0 auto;
-padding: 0;
+margin-left: 40%;
 }
 
 
