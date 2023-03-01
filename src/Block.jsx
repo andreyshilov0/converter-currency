@@ -9,11 +9,11 @@ const Block = ({
   onChangeSelect,
 }) => {
   return (
-    <div className="Box">
-      <div className="Box-selected">
+    <div className="box">
+      <div className="box-selected">
         <div>
           <select
-            className="Box-selector"
+            className="box-selector"
             onChange={(event) => {
               onChangeSelect(event.target.value);
             }}
@@ -33,13 +33,13 @@ const Block = ({
           </select>
         </div>
       </div>
-      <div className="Box-inputed">
+      <div className="box-inputed">
         <input
-          className="Box-input"
+          className="box-input"
           type="number"
           onChange={(e) => onChangeValue(e.target.value)}
           value={value}
-        ></input>
+        />
       </div>
     </div>
   );
